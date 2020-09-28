@@ -17,7 +17,9 @@ function seachWeather(city) {
         <h1>Current Weather: ${response.name}</h1>
         <div class="card-body">
             <p>Temperature: ${response.main.temp}</p>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p>Humidity: ${response.main.humidity}</p>
+            <p>Wind Speed: ${response.wind.speed}</p>
+            <p>UV Index: ${response.weather[0].description}</p>
         </div>
         </div>
         
@@ -47,8 +49,26 @@ function seachWeather2(city) {
         <h1>Forecast: ${response.city.name}</h1>
         <div class="card-body">
             <h2>Temperature: </h2>
-            <p>Day 1: ${response.list[0].main.temp}
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h3>Day 1: </h3>
+            <p> ${response.list[0].dt_txt} </p>
+            <p> ${response.list[0].main.temp} degrees Fahrenheit </p>
+            <p> Humidity: ${response.list[0].main.humidity} </p>
+            <h3>Day 2: </h3>
+            <p> ${response.list[7].dt_txt} </p>
+            <p> ${response.list[7].main.temp} degrees Fahrenheit</h3>
+            <p> Humidity: ${response.list[7].main.humidity} </p>
+            <h3>Day 3: </h3>
+            <p> ${response.list[15].dt_txt} </p>
+            <p> ${response.list[15].main.temp} degrees Fahrenheit</h3>
+            <p> Humidity: ${response.list[15].main.humidity} </p>
+            <h3>Day 4: </h3>
+            <p> ${response.list[23].dt_txt} </p>
+            <p> ${response.list[23].main.temp} degrees Fahrenheit</h3>
+            <p> Humidity: ${response.list[23].main.humidity} </p>
+            <h3>Day 5: </h3>
+            <p> ${response.list[31].dt_txt} </p>
+            <p> ${response.list[31].main.temp} degrees Fahrenheit</h3>
+            <p> Humidity: ${response.list[31].main.humidity} </p>
         </div>
         </div>
         
@@ -78,3 +98,58 @@ function seachWeather2(city) {
         seachWeather2(cityName2);
         
     });
+
+
+
+
+var searchInput = document.querySelector("#city-input");
+var searchBtn = document.querySelector("#find-city");
+var searchHistory = document.querySelector("#search-history");
+
+
+    renderLastSearched();
+    
+    function displayMessage(type, message) {
+        searchHistory.textContent = message;
+        searchHistory.setAttribute("class", type);
+    }
+
+
+    function renderLastSearched() {
+        var search = localStorage.getItem("city-input");
+
+        if (!search) {
+            return;
+        }
+
+        searchInput.textContent = search;
+    }
+    
+    
+    searchBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        
+        var search = document.querySelector("#city-input").value;
+        
+        if (search === "") {
+            displayMessage("error", "search cannot be blank");
+        } else {
+            displayMessage("success", card);
+            
+            localStorage.setItem("search", search);
+
+
+            var card = `
+            <div class="card" style="width: 18rem;">
+            <h1>Search History: </h1>
+            <div class="card-body">
+                <p>Cities: ${search} </p>
+            </div>
+            </div>
+        
+            `
+            $('#search-history').html(card);
+        }
+
+    });
+
