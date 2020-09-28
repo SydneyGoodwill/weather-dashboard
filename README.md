@@ -14,5 +14,5 @@ Link to the live site: [Weather Dashboard](https://sydneygoodwill.github.io/weat
 
 The following animation demonstrates the functionality of the application:
 
-![Weather Dashboard GIF](workdayscheduler.gif/)
+![Weather Dashboard GIF](weatherdash.gif/)
 
